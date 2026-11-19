@@ -1,12 +1,12 @@
 {
-  "name": "SUPER QUIZ – La sfida delle 5 materie",
+  "name": "SUPER QUIZ 2.0",
   "short_name": "SUPER QUIZ",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f4f3ff",
-  "theme_color": "#6558e8",
-  "description": "Gioco educativo per la scuola primaria: cinque materie e cinque classi.",
+  "background_color": "#f4f2ff",
+  "theme_color": "#6757df",
+  "description": "Quiz educativo per la scuola primaria, dalla prima alla quinta.",
   "icons": [
     {
       "src": "icon-192.png",

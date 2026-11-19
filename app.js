@@ -1,192 +1,149 @@
-const subjects=[
- {id:"math",name:"Matematica",emoji:"➗",color:"#3478df",tint:"#edf4ff",desc:"Numeri, calcoli e problemi"},
- {id:"science",name:"Scienze",emoji:"🔬",color:"#1b9b69",tint:"#eaf8f0",desc:"Natura, animali e corpo umano"},
- {id:"italian",name:"Italiano",emoji:"📚",color:"#e58a35",tint:"#fff3e8",desc:"Parole, grammatica e verbi"},
- {id:"geo",name:"Geografia",emoji:"🌍",color:"#8660d8",tint:"#f2edff",desc:"Italia, paesi e continenti"},
- {id:"geometry",name:"Geometria",emoji:"📐",color:"#d45b9c",tint:"#fff0f7",desc:"Figure, misure e solidi"}
-];
+const S=[
+{id:"math",n:"Matematica",e:"➗",c:"#3478df",t:"#edf4ff",d:"Numeri e problemi"},
+{id:"science",n:"Scienze",e:"🔬",c:"#1b9b69",t:"#eaf8f0",d:"Natura e corpo umano"},
+{id:"italian",n:"Italiano",e:"📚",c:"#e58a35",t:"#fff3e8",d:"Parole e grammatica"},
+{id:"geo",n:"Geografia",e:"🌍",c:"#8660d8",t:"#f2edff",d:"Italia e mondo"},
+{id:"geometry",n:"Geometria",e:"📐",c:"#d45b9c",t:"#fff0f7",d:"Figure e misure"}];
+const Q=[];
+function add(g,s,p,a,w,x){Q.push({g,s,p,a,w,x})}
+const data={
+1:{
+math:[
+["Quanto fa 3 + 2?","5",["4","6","7"],"3 più 2 fa 5."],["Quanto fa 8 − 3?","5",["4","6","3"],"8 meno 3 fa 5."],["Quale numero viene dopo 19?","20",["18","21","29"],"Dopo 19 viene 20."],["Quante unità ci sono in una decina?","10",["5","9","12"],"Una decina è formata da dieci unità."],["Hai 4 mele e ne ricevi 3. Quante sono?","7",["6","8","9"],"4 più 3 fa 7."]
+],
+science:[
+["Quale animale fa le uova?","Gallina",["Gatto","Cane","Mucca"],"La gallina è un uccello oviparo."],["Di che cosa ha bisogno una pianta per crescere?","Acqua e luce",["Solo buio","Plastica","Caramelle"],"Acqua e luce aiutano la pianta a vivere."],["Quale parte del corpo usiamo per vedere?","Occhi",["Orecchie","Mani","Piedi"],"Gli occhi sono gli organi della vista."],["Quale animale vive nell'acqua?","Pesce",["Leone","Cavallo","Gallina"],"I pesci vivono nell'acqua e respirano con le branchie."],["Quante zampe ha normalmente un insetto?","Sei",["Quattro","Otto","Dieci"],"Gli insetti hanno sei zampe."]
+],
+italian:[
+["Quale parola inizia con la lettera M?","Mela",["Sole","Casa","Luna"],"Mela inizia con M."],["Qual è il plurale di gatto?","Gatti",["Gatto","Gatte","Gattino"],"Il plurale di gatto è gatti."],["Quale parola è un nome di persona?","Bambina",["Correre","Alto","Velocemente"],"Bambina indica una persona."],["Completa: Il sole _____.","brilla",["brillano","brilliamo","brillate"],"Il soggetto singolare richiede brilla."],["Quale parola fa rima con pane?","Cane",["Mare","Sole","Fiore"],"Pane e cane terminano con lo stesso suono."]
+],
+geo:[
+["Come si chiama il luogo in cui abitiamo?","Terra",["Luna","Sole","Marte"],"Viviamo sul pianeta Terra."],["Quale elemento troviamo in una città?","Strade",["Ghiacciai soltanto","Crateri","Vulcani sempre"],"Le città hanno strade ed edifici."],["Dove si trova il mare?","Sulla superficie terrestre",["Nel cielo","Sotto il centro della Terra","Sulla Luna"],"I mari ricoprono parte della superficie terrestre."],["Quale mezzo viaggia sull'acqua?","Nave",["Treno","Bicicletta","Automobile"],"La nave naviga sull'acqua."],["Quale paesaggio ha molta sabbia e poche piogge?","Deserto",["Foresta pluviale","Ghiacciaio","Prato alpino"],"Il deserto è molto arido."]
+],
+geometry:[
+["Quanti lati ha un triangolo?","3",["2","4","5"],"Il triangolo ha tre lati."],["Quale figura è rotonda?","Cerchio",["Quadrato","Triangolo","Rettangolo"],"Il cerchio è una figura rotonda."],["Quanti lati ha un quadrato?","4",["3","5","6"],"Il quadrato ha quattro lati."],["Quale oggetto assomiglia a una sfera?","Palla",["Libro","Scatola","Finestra"],"La palla ha forma sferica."],["Quanti vertici ha un triangolo?","3",["2","4","5"],"Un triangolo ha tre vertici."]
+]},
+2:{
+math:[
+["Quanto fa 24 + 15?","39",["38","40","41"],"24 più 15 fa 39."],["Quanto fa 50 − 18?","32",["28","38","42"],"50 meno 18 fa 32."],["Quanto fa 5 × 2?","10",["7","8","12"],"Cinque gruppi da due fanno dieci."],["Qual è la metà di 18?","9",["8","10","12"],"La metà di 18 è 9."],["Hai 3 sacchetti con 4 biglie ciascuno. Quante biglie?","12",["7","9","16"],"3 gruppi da 4 fanno 12."]
+],
+science:[
+["Quale organo usiamo per ascoltare?","Orecchie",["Occhi","Naso","Mani"],"Le orecchie permettono l'udito."],["Quale animale è un mammifero?","Delfino",["Trota","Rana","Lucertola"],"Il delfino è un mammifero."],["Quale parte della pianta assorbe acqua?","Radice",["Fiore","Frutto","Petalo"],"Le radici assorbono acqua dal terreno."],["L'acqua può diventare ghiaccio quando...","si raffredda molto",["si scalda","si mescola alla sabbia","si illumina"],"L'acqua solidifica quando si raffredda fino al punto di congelamento."],["Quale alimento deriva dal latte?","Formaggio",["Pane","Riso","Mela"],"Il formaggio si produce con il latte."]
+],
+italian:[
+["Qual è il contrario di alto?","Basso",["Largo","Lungo","Grande"],"Basso è il contrario di alto."],["Qual è il verbo nella frase 'Marta canta'?","Canta",["Marta","La","Nessuno"],"Canta indica l'azione."],["Qual è il plurale di amico?","Amici",["Amiche","Amico","Amicii"],"Il plurale maschile di amico è amici."],["Quale parola è un aggettivo?","Rosso",["Tavolo","Saltare","Ieri"],"Rosso descrive una qualità."],["Completa: Noi _____ a scuola.","andiamo",["vai","vanno","andate"],"Con noi si usa andiamo."]
+],
+geo:[
+["Qual è la capitale d'Italia?","Roma",["Milano","Torino","Napoli"],"Roma è la capitale d'Italia."],["Quale paesaggio ha alte montagne?","Montagna",["Pianura","Costa","Deserto"],"La montagna presenta rilievi elevati."],["Dove sfocia un fiume?","Nel mare o in un lago",["Sulla cima di un monte","Nel cielo","Nel deserto sempre"],"La foce è il punto in cui il fiume termina."],["Quale punto cardinale indica il sorgere del Sole?","Est",["Ovest","Nord","Sud"],"Il Sole sorge a est."],["Quale regione italiana ha Venezia come capoluogo?","Veneto",["Lombardia","Toscana","Liguria"],"Venezia è il capoluogo del Veneto."]
+],
+geometry:[
+["Quanti angoli ha un rettangolo?","4",["3","5","6"],"Il rettangolo ha quattro angoli."],["Quale figura ha tre lati?","Triangolo",["Quadrato","Pentagono","Cerchio"],"Il triangolo ha tre lati."],["Quanti centimetri formano un metro?","100",["10","50","1000"],"Un metro corrisponde a 100 centimetri."],["Quale solido assomiglia a una scatola da scarpe?","Parallelepipedo",["Sfera","Cono","Cilindro"],"Una scatola ha forma di parallelepipedo."],["Quanti lati uguali ha un quadrato?","4",["2","3","Nessuno"],"I quattro lati del quadrato sono uguali."]
+]},
+3:{
+math:[
+["Quanto fa 7 × 8?","56",["54","48","64"],"7 per 8 fa 56."],["Quanto fa 144 ÷ 12?","12",["10","11","14"],"144 diviso 12 fa 12."],["Quanto fa 235 + 148?","383",["373","393","483"],"235 più 148 fa 383."],["Qual è il triplo di 24?","72",["48","68","84"],"24 per 3 fa 72."],["Un libro costa 8 euro. Quanto costano 4 libri?","32 euro",["24 euro","28 euro","36 euro"],"8 per 4 fa 32 euro."]
+],
+science:[
+["Quale organo pompa il sangue?","Cuore",["Polmone","Stomaco","Cervello"],"Il cuore pompa il sangue."],["Quale processo permette alle piante di usare la luce per produrre nutrimento?","Fotosintesi",["Digestione","Evaporazione","Germinazione"],"La fotosintesi usa la luce per produrre zuccheri."],["A quale temperatura ghiaccia l'acqua pura normalmente?","0 °C",["10 °C","50 °C","100 °C"],"A pressione normale l'acqua ghiaccia a 0 °C."],["Quale animale è un anfibio?","Rana",["Serpente","Aquila","Delfino"],"La rana è un anfibio."],["Quale gas è necessario alla respirazione umana?","Ossigeno",["Elio","Metano","Idrogeno"],"Le cellule utilizzano ossigeno."]
+],
+italian:[
+["Qual è il soggetto in 'Il cane corre nel prato'?","Il cane",["Corre","Nel prato","Il"],"Il cane compie l'azione."],["Qual è il passato prossimo di mangiare, prima persona singolare?","Ho mangiato",["Mangiai","Mangerò","Mangiavo"],"La forma è ho mangiato."],["Quale parola è un avverbio?","Lentamente",["Lento","Lentezza","Lente"],"Lentamente modifica il verbo."],["Qual è il sinonimo di felice?","Contento",["Triste","Arrabbiato","Stanco"],"Contento ha significato simile a felice."],["Quale frase è corretta?","Qual è il tuo nome?",["Qual'è il tuo nome?","Quale il tuo nome?","Quale'è il tuo nome?"],"Qual è si scrive senza apostrofo."]
+],
+geo:[
+["Qual è il fiume più lungo d'Italia?","Po",["Tevere","Arno","Adige"],"Il Po è il fiume più lungo d'Italia."],["Quale mare bagna la costa orientale italiana?","Adriatico",["Tirreno","Ligure","Ionio"],"Il Mar Adriatico bagna la costa orientale."],["Qual è il continente più esteso?","Asia",["Africa","Europa","Oceania"],"L'Asia è il continente più esteso."],["Come si chiama la rappresentazione ridotta della Terra?","Mappamondo",["Termometro","Plastico","Grafico"],"Il mappamondo rappresenta il globo."],["Quale regione ha Palermo come capoluogo?","Sicilia",["Sardegna","Puglia","Calabria"],"Palermo è il capoluogo siciliano."]
+],
+geometry:[
+["Un rettangolo misura 5 cm e 3 cm. Qual è il perimetro?","16 cm",["8 cm","15 cm","20 cm"],"5+3+5+3 = 16 cm."],["Quanti gradi misura un angolo retto?","90°",["45°","180°","360°"],"Un angolo retto misura 90 gradi."],["Come si chiama un poligono con 5 lati?","Pentagono",["Esagono","Ottagono","Triangolo"],"Il pentagono ha cinque lati."],["Qual è l'area di un quadrato con lato 4 cm?","16 cm²",["8 cm²","12 cm²","20 cm²"],"4 per 4 fa 16 cm²."],["Quante facce ha un cubo?","6",["4","8","12"],"Il cubo ha sei facce."]
+]},
+4:{
+math:[
+["Quanto fa 3.456 + 2.789?","6.245",["6.145","6.235","6.345"],"La somma è 6.245."],["Quanto fa 936 ÷ 9?","104",["106","94","114"],"9 per 104 fa 936."],["Quanto fa 25 × 16?","400",["350","390","420"],"25 per 16 fa 400."],["Quanto vale 3/4 di 20?","15",["10","12","16"],"20 diviso 4 per 3 fa 15."],["Un treno percorre 60 km in un'ora. Quanti km in 3 ore alla stessa velocità?","180 km",["120 km","160 km","200 km"],"60 per 3 fa 180 km."]
+],
+science:[
+["Quale apparato trasporta il sangue?","Circolatorio",["Digerente","Respiratorio","Scheletrico"],"Il sistema circolatorio trasporta il sangue."],["Qual è il pianeta chiamato Pianeta Rosso?","Marte",["Venere","Giove","Saturno"],"Marte appare rossastro per gli ossidi di ferro."],["Come si chiama il passaggio da liquido a gas?","Evaporazione",["Condensazione","Solidificazione","Fusione"],"L'evaporazione trasforma il liquido in vapore."],["Quale fonte energetica è rinnovabile?","Solare",["Carbone","Petrolio","Gas naturale"],"L'energia solare è rinnovabile."],["Quale organo coordina molte attività del corpo?","Cervello",["Milza","Stomaco","Polmone"],"Il cervello coordina il sistema nervoso."]
+],
+italian:[
+["Quale parola è un pronome personale?","Noi",["Bello","Sotto","Casa"],"Noi è un pronome personale."],["Qual è il participio passato di scrivere?","Scritto",["Scrivuto","Scrivendo","Scrisse"],"Il participio passato è scritto."],["Quale frase contiene un complemento di luogo?","Vado in palestra",["Mangio una mela","Leggo bene","Sono felice"],"In palestra indica il luogo."],["Quale parola è un nome astratto?","Coraggio",["Sedia","Matita","Finestra"],"Il coraggio è un concetto astratto."],["Quale tempo indica un'azione futura?","Partirò",["Partivo","Partii","Parto"],"Partirò indica il futuro."]
+],
+geo:[
+["Quale catena montuosa separa l'Italia dalla Francia in parte?","Alpi",["Appennini","Pirenei","Carpazi"],"Le Alpi segnano parte del confine."],["Qual è la capitale della Spagna?","Madrid",["Barcellona","Siviglia","Valencia"],"Madrid è la capitale spagnola."],["Quale oceano è il più vasto?","Pacifico",["Atlantico","Indiano","Artico"],"Il Pacifico è il più esteso."],["Che cosa indica la scala di una carta?","Il rapporto tra distanze sulla carta e reali",["I punti cardinali","Le temperature","Le altezze delle nuvole"],"La scala esprime la riduzione delle distanze."],["Quale città è capoluogo della Lombardia?","Milano",["Brescia","Bergamo","Como"],"Milano è il capoluogo lombardo."]
+],
+geometry:[
+["Un quadrato ha lato 7 cm. Qual è il perimetro?","28 cm",["14 cm","21 cm","49 cm"],"4 per 7 fa 28 cm."],["Qual è l'area di un rettangolo 8 × 5 cm?","40 cm²",["26 cm²","13 cm²","80 cm²"],"8 per 5 fa 40 cm²."],["Come si chiama un triangolo con due lati uguali?","Isoscele",["Equilatero","Scaleno","Ottusangolo"],"Il triangolo isoscele ha due lati uguali."],["Quanti vertici ha un cubo?","8",["6","10","12"],"Il cubo ha otto vertici."],["Qual è la somma degli angoli interni di un triangolo?","180°",["90°","270°","360°"],"La somma è sempre 180 gradi."]
+]},
+5:{
+math:[
+["Quanto fa 2,5 × 4?","10",["8","9","12"],"2,5 per 4 fa 10."],["Quanto fa 3/5 di 40?","24",["18","20","30"],"40 diviso 5 per 3 fa 24."],["Un prodotto costa 80 euro e ha uno sconto del 25%. Quanto costa dopo lo sconto?","60 euro",["55 euro","65 euro","75 euro"],"Il 25% di 80 è 20; 80 meno 20 fa 60."],["Quanto fa 1.250 ÷ 25?","50",["25","40","60"],"25 per 50 fa 1.250."],["Un'auto percorre 150 km in 2 ore. Qual è la velocità media?","75 km/h",["60 km/h","70 km/h","80 km/h"],"150 diviso 2 fa 75 km/h."]
+],
+science:[
+["Quale gas assorbono le piante durante la fotosintesi?","Anidride carbonica",["Ossigeno","Elio","Azoto puro"],"Le piante usano anidride carbonica e acqua."],["Quale forza ci mantiene sulla superficie terrestre?","Gravità",["Attrito soltanto","Magnetismo terrestre","Elettricità"],"La gravità attrae i corpi verso la Terra."],["Quale organo filtra il sangue producendo urina?","Reni",["Polmoni","Stomaco","Cuore"],"I reni filtrano il sangue."],["Che cosa studia l'ecologia?","Le relazioni tra organismi e ambiente",["Solo le rocce","Solo i pianeti","Le regole grammaticali"],"L'ecologia studia gli ecosistemi."],["Quale pianeta è il più grande del Sistema Solare?","Giove",["Terra","Marte","Mercurio"],"Giove è il pianeta più grande."]
+],
+italian:[
+["In quale frase il verbo è al congiuntivo?","Spero che tu venga",["Tu vieni oggi","Tu verrai domani","Tu venisti ieri"],"Venga è congiuntivo presente."],["Qual è il complemento oggetto in 'Sara legge un romanzo'?","Un romanzo",["Sara","Legge","Nessuno"],"Un romanzo risponde a che cosa legge?"],["Quale parola è un avverbio di tempo?","Domani",["Rapidamente","Qui","Molto"],"Domani indica quando."],["Qual è la forma corretta?","Ce l'ho",["C'è l'ho","Celo","Ce lo ho"],"Ce l'ho è la grafia corretta."],["Quale figura retorica attribuisce qualità umane a un oggetto?","Personificazione",["Similitudine","Rima","Allitterazione"],"La personificazione attribuisce caratteristiche umane."]
+],
+geo:[
+["Qual è la capitale del Canada?","Ottawa",["Toronto","Vancouver","Montreal"],"Ottawa è la capitale canadese."],["Quale linea è a 0° di longitudine?","Meridiano di Greenwich",["Equatore","Tropico del Cancro","Circolo polare"],"Greenwich è il meridiano fondamentale."],["Quale Stato è attraversato dal Nilo?","Egitto",["Norvegia","Cile","Giappone"],"Il Nilo attraversa l'Egitto."],["Quale fascia climatica si trova intorno all'Equatore?","Tropicale",["Polare","Temperata fredda","Subartica"],"La fascia equatoriale è calda e spesso umida."],["Che cosa rappresentano le curve di livello?","Punti alla stessa altitudine",["Stesse temperature","Confini politici","Distanze stradali"],"Le curve di livello uniscono punti di uguale quota."]
+],
+geometry:[
+["Un triangolo ha base 10 cm e altezza 6 cm. Qual è l'area?","30 cm²",["60 cm²","16 cm²","36 cm²"],"10 per 6 diviso 2 fa 30 cm²."],["Qual è il volume di un cubo con lato 3 cm?","27 cm³",["9 cm³","18 cm³","36 cm³"],"3 per 3 per 3 fa 27 cm³."],["Quanto misura un angolo giro?","360°",["180°","270°","90°"],"Un angolo giro misura 360 gradi."],["Qual è la formula della circonferenza?","2 × π × r",["π × r²","lato × 4","base × altezza"],"La circonferenza è due pi greco per il raggio."],["Un parallelepipedo ha dimensioni 2, 3 e 4 cm. Qual è il volume?","24 cm³",["9 cm³","12 cm³","20 cm³"],"2 per 3 per 4 fa 24 cm³."]
+]}
+};
+for(let g=1;g<=5;g++)for(const sid of Object.keys(data[g]))for(const row of data[g][sid])add(g,sid,row[0],row[1],row[2],row[3]);
+
+const state={screen:"home",grade:3,subject:"mixed",difficulty:"standard",name:"",questions:[],index:0,score:0,answered:false,chosen:null,players:[],turn:0,sound:true};
 const $=s=>document.querySelector(s);
-let state={screen:"home",grade:3,name:"",subject:"mixed",questions:[],index:0,score:0,chosen:null,answered:false,sound:true};
-const store={get scores(){try{return JSON.parse(localStorage.getItem("sq_scores")||"[]")}catch{return[]}},set scores(v){localStorage.setItem("sq_scores",JSON.stringify(v))}};
-function q(subject,prompt,choices,answer,explain,grade=3){return {subject,prompt,choices,answer,explain,grade}}
-function makeBank(){
- const b=[];
- // 100 matematica: 20 esercizi per classe, con numeri adeguati alla fascia.
- for(let g=1;g<=5;g++) for(let i=0;i<20;i++){
-  let a,bb,op,ans,prompt;
-  if(g===1){a=2+(i*3)%18;bb=1+(i*2)%9;op=i%2?"+":"−";if(op==="−"&&bb>a)[a,bb]=[bb,a];ans=op==="+"?a+bb:a-bb;prompt=`Quanto fa ${a} ${op} ${bb}?`}
-  else if(g===2){a=12+(i*7)%68;bb=2+(i*3)%25;op=i%3===0?"×":i%3===1?"+":"−";if(op==="×"){a=2+(i%8);bb=2+((i*3)%9)}if(op==="−"&&bb>a)[a,bb]=[bb,a];ans=op==="×"?a*bb:op==="+"?a+bb:a-bb;prompt=`Quanto fa ${a} ${op} ${bb}?`}
-  else if(g===3){a=20+(i*13)%180;bb=2+(i*5)%30;op=i%3===0?"×":i%3===1?"+":"−";if(op==="×"){a=2+(i%12);bb=2+((i*2)%10)}if(op==="−"&&bb>a)[a,bb]=[bb,a];ans=op==="×"?a*bb:op==="+"?a+bb:a-bb;prompt=`Calcola: ${a} ${op} ${bb}.`}
-  else if(g===4){a=100+(i*37)%700;bb=10+(i*11)%90;op=i%3===0?"÷":i%3===1?"×":"+";if(op==="÷"){bb=2+(i%9);a=bb*(3+(i*7)%30)}if(op==="×"){a=12+(i%18);bb=3+(i%9)}ans=op==="÷"?a/bb:op==="×"?a*bb:a+bb;prompt=`Risolvi: ${a} ${op} ${bb}.`}
-  else{a=1000+(i*137)%8000;bb=100+(i*29)%900;op=i%3===0?"÷":i%3===1?"×":"−";if(op==="÷"){bb=2+(i%12);a=bb*(20+(i*3)%80)}if(op==="×"){a=12+(i%28);bb=11+(i%17)}if(op==="−"&&bb>a)[a,bb]=[bb,a];ans=op==="÷"?a/bb:op==="×"?a*bb:a-bb;prompt=`Risolvi: ${a} ${op} ${bb}.`}
-  const wrong=[ans+2,ans-3,ans+5].map((v,k)=>v<0?ans+7+k:v);const choices=[String(ans),...wrong.map(String)].sort(()=>Math.random()-.5);b.push(q("math",prompt,choices,String(ans),`Il risultato è ${ans}.`,g));
- }
- const facts={
- science:[
- ["Quale organo pompa il sangue?","Cuore",["Polmone","Stomaco","Rene"],"Il cuore spinge il sangue in tutto il corpo."],
- ["Quale parte della pianta assorbe acqua?","Radice",["Fiore","Frutto","Foglia"],"Le radici assorbono acqua e sali minerali."],
- ["Quale animale è un mammifero?","Delfino",["Trota","Rana","Lucertola"],"Il delfino respira aria e allatta i piccoli."],
- ["A quale temperatura ghiaccia l'acqua pura?","0 °C",["10 °C","50 °C","100 °C"],"A pressione normale l'acqua ghiaccia a 0 °C."],
- ["Quale stella illumina la Terra?","Sole",["Luna","Venere","Marte"],"Il Sole è la stella del nostro sistema."],
- ["Quale gas respiriamo per vivere?","Ossigeno",["Elio","Azoto puro","Anidride carbonica"],"Le cellule usano l'ossigeno nella respirazione."],
- ["Quale organo usiamo principalmente per respirare?","Polmoni",["Cuore","Fegato","Stomaco"],"I polmoni permettono gli scambi gassosi."],
- ["Come si chiama il passaggio da liquido a vapore?","Evaporazione",["Fusione","Congelamento","Condensazione"],"Con l'evaporazione un liquido diventa vapore."],
- ["Quale animale depone uova?","Gallina",["Gatto","Cane","Mucca"],"La gallina è un uccello oviparo."],
- ["Quale materiale è attirato da una calamita?","Ferro",["Legno","Vetro","Carta"],"Il ferro è un materiale ferromagnetico."],
- ["Quale parte del corpo protegge il cervello?","Cranio",["Costole","Femore","Bacino"],"Il cranio è la struttura ossea che protegge il cervello."],
- ["Quale pianeta è chiamato Pianeta Rosso?","Marte",["Venere","Giove","Saturno"],"La superficie ricca di ossidi di ferro appare rossastra."],
- ["Che cosa producono le api?","Miele",["Latte","Seta","Cera di petrolio"],"Le api trasformano il nettare in miele."],
- ["Quale stato ha forma e volume propri?","Solido",["Liquido","Aeriforme","Vapore"],"Un solido mantiene forma e volume."],
- ["Quale apparato digerisce il cibo?","Apparato digerente",["Apparato respiratorio","Sistema nervoso","Apparato scheletrico"],"L'apparato digerente trasforma gli alimenti."],
- ["Come si chiama l'insieme degli esseri viventi e dell'ambiente?","Ecosistema",["Continente","Minerale","Costellazione"],"Un ecosistema comprende organismi e ambiente."],
- ["Quale fonte di energia è rinnovabile?","Energia solare",["Carbone","Petrolio","Gas naturale"],"La luce solare si rinnova continuamente."],
- ["Quale organo controlla molte attività del corpo?","Cervello",["Milza","Polmone","Intestino"],"Il cervello coordina funzioni e risposte."],
- ["Quale animale è un anfibio?","Rana",["Serpente","Aquila","Delfino"],"La rana vive parte della vita in acqua e parte sulla terra."],
- ["Quale processo permette alle piante di produrre zuccheri usando la luce?","Fotosintesi",["Digestione","Respirazione polmonare","Fermentazione"],"La fotosintesi usa luce, acqua e anidride carbonica."]
- ],
- italian:[
- ["Qual è il plurale di 'fiore'?","Fiori",["Fiore","Fiorese","Fiorei"],"Il plurale di fiore è fiori."],
- ["In 'Luca corre', qual è il verbo?","Corre",["Luca","Il","Nessuno"],"Corre indica l'azione."],
- ["Quale parola è un aggettivo?","Allegro",["Correre","Tavolo","Ieri"],"Allegro esprime una qualità."],
- ["Qual è il contrario di 'generoso'?","Avaro",["Altruista","Gentile","Disponibile"],"Avaro indica chi è poco disposto a condividere."],
- ["Quale frase è corretta?","Qual è il tuo nome?",["Qual'è il tuo nome?","Quale il tuo nome?","Quale'è il tuo nome?"],"Qual è si scrive senza apostrofo."],
- ["Qual è il soggetto in 'La bambina legge'?","La bambina",["Legge","Il libro","Nessuno"],"Il soggetto compie l'azione."],
- ["Quale parola è un nome proprio?","Giulia",["città","bambino","fiume"],"I nomi propri indicano persone o luoghi specifici."],
- ["Quale articolo accompagna 'zaino'?","Lo",["Il","La","Gli"],"Si dice lo zaino."],
- ["Qual è il passato remoto di 'andare' alla terza persona singolare?","Andò",["Andava","È andato","Andrà"],"La forma è egli andò."],
- ["Quale parola contiene un dittongo?","Fiore",["Casa","Pane","Luna"],"In fiore le vocali i e o formano un dittongo."],
- ["Qual è il sinonimo di 'veloce'?","Rapido",["Lento","Fermo","Pesante"],"Rapido ha significato simile a veloce."],
- ["Quale frase contiene un complemento di luogo?","Vado a scuola",["Mangio una mela","Leggo un libro","Corro velocemente"],"'A scuola' indica il luogo."],
- ["Quale è un pronome personale?","Noi",["Bello","Sotto","Casa"],"Noi è un pronome personale."],
- ["Quale verbo è al futuro?","Partirò",["Partivo","Parto","Partii"],"Partirò indica un'azione futura."],
- ["Quale parola è un avverbio?","Lentamente",["Lento","Lentezza","Rallentare"],"Lentamente modifica il significato del verbo."],
- ["Come si chiama una parola con significato opposto a un'altra?","Antonimo",["Sinonimo","Omonimo","Accrescitivo"],"L'antonimo esprime significato contrario."],
- ["Quale segno chiude una domanda diretta?","Punto interrogativo",["Punto fermo","Virgola","Due punti"],"Il punto interrogativo chiude una domanda."],
- ["Quale forma è corretta?","Ce l'ho",["C'è l'ho","Ce lo","Celo"],"Ce l'ho è la forma corretta con il verbo avere."],
- ["Qual è il participio passato di 'scrivere'?","Scritto",["Scrivuto","Scrivendo","Scrisse"],"Il participio passato è scritto."],
- ["Quale parola è un nome astratto?","Coraggio",["Sedia","Matita","Finestra"],"Il coraggio è un concetto, non un oggetto materiale."]
- ],
- geo:[
- ["Qual è la capitale d'Italia?","Roma",["Milano","Napoli","Torino"],"Roma è la capitale italiana."],
- ["In quale continente si trova il Brasile?","America del Sud",["Africa","Asia","Europa"],"Il Brasile si trova in America meridionale."],
- ["Quale mare bagna la costa occidentale italiana?","Mar Tirreno",["Mar Adriatico","Mar Nero","Mar Baltico"],"Il Tirreno bagna la costa occidentale."],
- ["Quale linea immaginaria divide la Terra in emisfero nord e sud?","Equatore",["Meridiano di Greenwich","Tropico del Cancro","Circolo polare"],"L'Equatore è a 0° di latitudine."],
- ["Qual è la vetta più alta sopra il livello del mare?","Everest",["K2","Monte Bianco","Kilimangiaro"],"L'Everest è la montagna più alta."],
- ["Qual è il fiume più lungo d'Italia?","Po",["Tevere","Arno","Adige"],"Il Po attraversa la Pianura Padana."],
- ["In quale regione si trova Venezia?","Veneto",["Lombardia","Piemonte","Toscana"],"Venezia è il capoluogo del Veneto."],
- ["Quale oceano è il più vasto?","Pacifico",["Atlantico","Indiano","Artico"],"L'Oceano Pacifico è il più esteso."],
- ["Quale strumento indica i punti cardinali?","Bussola",["Termometro","Barometro","Igrometro"],"La bussola indica il nord magnetico."],
- ["Qual è la capitale della Francia?","Parigi",["Lione","Marsiglia","Nizza"],"Parigi è la capitale francese."],
- ["Quale regione italiana ha Palermo come capoluogo?","Sicilia",["Sardegna","Calabria","Puglia"],"Palermo è il capoluogo della Sicilia."],
- ["Come si chiama una rappresentazione ridotta della Terra?","Mappamondo",["Plastico","Grafico","Diagramma"],"Il mappamondo rappresenta il globo terrestre."],
- ["Quale continente è attraversato dal fiume Nilo?","Africa",["Europa","Oceania","Antartide"],"Il Nilo scorre nell'Africa nord-orientale."],
- ["Quale Stato ha Madrid come capitale?","Spagna",["Portogallo","Grecia","Austria"],"Madrid è la capitale della Spagna."],
- ["Che cosa indica la latitudine?","Distanza angolare dall'Equatore",["Distanza dal mare","Altezza di una montagna","Profondità del mare"],"La latitudine si misura a nord o sud dell'Equatore."],
- ["Quale catena montuosa separa in parte Italia e Francia?","Alpi",["Appennini","Pirenei","Carpazi"],"Le Alpi segnano parte del confine tra Italia e Francia."],
- ["Quale mare si trova a est dell'Italia?","Mar Adriatico",["Mar Tirreno","Mar Ligure","Mar di Sardegna"],"L'Adriatico bagna la costa orientale italiana."],
- ["Quale continente è il più freddo?","Antartide",["Europa","Africa","America del Sud"],"L'Antartide è il continente più freddo."],
- ["Quale città è capoluogo della Lombardia?","Milano",["Bergamo","Brescia","Como"],"Milano è il capoluogo lombardo."],
- ["Quale elemento della carta spiega il significato dei simboli?","Legenda",["Scala","Titolo","Reticolo"],"La legenda spiega i simboli della carta."]
- ],
- geometry:[
- ["Quanti lati ha un triangolo?","3",["2","4","5"],"Un triangolo ha tre lati."],
- ["Quanti angoli retti ha un quadrato?","4",["1","2","3"],"Tutti gli angoli del quadrato sono retti."],
- ["Quale figura ha tutti i punti del bordo alla stessa distanza dal centro?","Circonferenza",["Triangolo","Rettangolo","Trapezio"],"La circonferenza è equidistante dal centro."],
- ["Un rettangolo misura 5 cm per 3 cm. Qual è il perimetro?","16 cm",["8 cm","15 cm","20 cm"],"5 + 3 + 5 + 3 = 16 cm."],
- ["Quante facce ha un cubo?","6",["4","8","12"],"Il cubo ha sei facce quadrate."],
- ["Quanti lati uguali ha un quadrato?","4",["2","3","5"],"Il quadrato ha quattro lati congruenti."],
- ["Come si chiama un poligono di 5 lati?","Pentagono",["Esagono","Ottagono","Quadrilatero"],"Il pentagono ha cinque lati."],
- ["Quanti gradi misura un angolo retto?","90°",["45°","180°","360°"],"L'angolo retto misura 90 gradi."],
- ["Qual è la formula dell'area del rettangolo?","Base × altezza",["Lato × 4","Base + altezza","Base × altezza ÷ 2"],"L'area del rettangolo è base per altezza."],
- ["Quanti vertici ha un cubo?","8",["6","10","12"],"Il cubo ha otto vertici."],
- ["Come si chiama un triangolo con tre lati uguali?","Equilatero",["Isoscele","Scaleno","Rettangolo"],"Nel triangolo equilatero i tre lati sono uguali."],
- ["Quante diagonali ha un quadrato?","2",["1","3","4"],"Un quadrato ha due diagonali."],
- ["Qual è il perimetro di un quadrato con lato 6 cm?","24 cm",["12 cm","18 cm","36 cm"],"Il perimetro è 4 × 6 = 24 cm."],
- ["Quale solido ha due basi circolari?","Cilindro",["Cubo","Piramide","Cono"],"Il cilindro ha due basi circolari parallele."],
- ["Quanti gradi misura un angolo piatto?","180°",["90°","120°","360°"],"L'angolo piatto misura 180 gradi."],
- ["Come si chiama il segmento dal centro alla circonferenza?","Raggio",["Diametro","Cordа","Perimetro"],"Il raggio unisce il centro a un punto della circonferenza."],
- ["Quale quadrilatero ha una sola coppia di lati paralleli?","Trapezio",["Rombo","Rettangolo","Quadrato"],"Il trapezio ha una coppia di lati paralleli."],
- ["Quante basi ha una piramide a base quadrata?","1",["2","4","6"],"La piramide ha una base e facce laterali triangolari."],
- ["Qual è l'area di un quadrato con lato 4 cm?","16 cm²",["8 cm²","12 cm²","20 cm²"],"L'area è 4 × 4 = 16 cm²."],
- ["Come si chiama la distanza dal centro a un punto del cerchio?","Raggio",["Diametro","Lato","Altezza"],"Il raggio è metà del diametro."]
- ]
- };
- for(const [sid,arr] of Object.entries(facts)){
-  for(let g=1;g<=5;g++) for(let i=0;i<arr.length;i++){
-   const [prompt,answer,wrong,explain]=arr[i];
-   // Stesso nucleo didattico, ma formulazione contestualizzata per la classe.
-   const prefix=g===1?"Osserva e rispondi: ":g===2?"Per la tua classe: ":g===3?"Ragiona e rispondi: ":g===4?"Domanda di ripasso: ":"Sfida esperto: ";
-   let choices=[answer,...wrong];
-   b.push(q(sid,prefix+prompt,choices,answer,explain,g));
-  }
- }
- return b;
-}
-const bank=makeBank();
-function render(){
- const root=$("#app");
- if(state.screen==="home") root.innerHTML=homeHTML();
- if(state.screen==="quiz") root.innerHTML=quizHTML();
- if(state.screen==="result") root.innerHTML=resultHTML();
- if(state.screen==="rank") root.innerHTML=rankHTML();
- bind();
-}
-function homeHTML(){
- return `<section class="hero"><div class="hero-emoji">🎓✨</div><h1>SUPER QUIZ</h1><p>Impara, gioca e conquista le stelle!</p><span class="chip">5 materie · 5 classi · 10 domande</span></section>
- <section class="panel"><label class="field-label" for="playerName">COME TI CHIAMI?</label><input class="field" id="playerName" maxlength="20" placeholder="Scrivi il tuo nome" value="${esc(state.name)}"><div style="height:16px"></div><div class="field-label">SCEGLI LA TUA CLASSE</div><div class="grade-grid">${[1,2,3,4,5].map(g=>`<button class="grade ${state.grade===g?'active':''}" data-grade="${g}">${g}ª</button>`).join("")}</div></section>
- <section class="panel"><div class="section-title">Scegli la materia</div><div class="subject-grid"><button class="subject ${state.subject==='mixed'?'active':''}" data-subject="mixed" style="--tint:#f0efff;--color:#6558e8"><span class="emoji">🎲</span><span>Tutte<small>Modalità mista</small></span></button>${subjects.map(s=>`<button class="subject ${state.subject===s.id?'active':''}" data-subject="${s.id}" style="--tint:${s.tint};--color:${s.color}"><span class="emoji">${s.emoji}</span><span>${s.name}<small>${s.desc}</small></span></button>`).join("")}</div></section>
- <button class="btn" id="start">🚀 INIZIA A GIOCARE</button><div class="actions"><button class="btn secondary" id="leaderboard">🏆 Classifica</button><button class="btn secondary" id="howto">❔ Come si gioca</button></div>
- <section class="panel muted" style="text-align:center">Funziona anche senza connessione dopo il primo caricamento. I punteggi restano salvati su questo dispositivo.</section>`;
-}
-function quizHTML(){
- const q=state.questions[state.index],s=subjects.find(x=>x.id===q.subject);
- return `<div class="quiz-head"><button class="chip" id="quit">← Esci</button><span>DOMANDA ${state.index+1} / 10</span><span>⭐ ${state.score}</span></div><div class="progress"><span style="width:${(state.index+1)*10}%"></span></div>
- <section class="panel question-card"><div class="q-emoji">${s.emoji}</div><div class="q-subject">${s.name.toUpperCase()} · ${q.grade}ª ELEMENTARE</div><div class="question">${q.prompt}</div><div class="answers">${q.choices.map((c,i)=>{let cls="answer";if(state.answered&&c===q.answer)cls+=" correct";else if(state.answered&&c===state.chosen)cls+=" wrong";return `<button class="${cls}" data-answer="${esc(c)}" ${state.answered?'disabled':''}><span>${String.fromCharCode(65+i)}. ${esc(c)}</span><span>${state.answered&&c===q.answer?'✓':state.answered&&c===state.chosen?'✕':''}</span></button>`}).join("")}</div>
- ${state.answered?`<div class="feedback ${state.chosen===q.answer?'good':'bad'}">${state.chosen===q.answer?'🎉 Bravissimo! Risposta esatta!':'💡 Non preoccuparti! La risposta corretta è: '+esc(q.answer)}<br><span style="font-weight:700">${esc(q.explain)}</span></div><button class="btn" id="next">${state.index===9?'🏆 VEDI IL RISULTATO':'CONTINUA →'}</button>`:''}</section>
- <div class="scoreline">⭐ Punteggio: ${state.score} punti</div>`;
-}
-function resultHTML(){
- const pct=state.score,medal=pct>=90?"🏆":pct>=70?"🥇":pct>=50?"🌟":"💪";
- const msg=pct>=90?"Straordinario! Sei un campione!":pct>=70?"Ottimo lavoro! Continua così!":pct>=50?"Bravo! Con un po' di allenamento farai ancora meglio.":"Non mollare! Ogni errore è un'occasione per imparare.";
- return `<section class="panel result"><div class="medal">${medal}</div><h2>Partita completata!</h2><div class="big-score">${pct} / 100</div><p class="muted">${msg}</p><span class="chip">${esc(state.name)} · ${state.grade}ª elementare</span><div style="height:20px"></div><button class="btn" id="again">🔄 GIOCA ANCORA</button><div style="height:10px"></div><button class="btn secondary" id="leaderboard">🏆 VEDI LA CLASSIFICA</button><div style="height:10px"></div><button class="btn secondary" id="home">⌂ TORNA ALLA HOME</button></section>`;
-}
-function rankHTML(){
- const scores=store.scores.sort((a,b)=>b.points-a.points).slice(0,50);
- return `<div class="row" style="margin:8px 0 16px"><button class="chip" id="home">← Home</button><div class="section-title" style="text-align:center;flex:3;margin:0">🏆 CLASSIFICA</div><button class="chip" id="reset">🗑 Reset</button></div><section class="panel"><p class="muted">Migliori 50 risultati salvati su questo dispositivo.</p>${scores.length?scores.map((s,i)=>`<div class="rank-row"><div class="rank">${i===0?'🥇':i===1?'🥈':i===2?'🥉':i+1+'.'}</div><div><div class="rank-name">${esc(s.name)}</div><div class="rank-meta">${s.grade}ª elementare · ${new Date(s.date).toLocaleDateString('it-IT')}</div></div><div class="rank-points">${s.points} pt</div></div>`).join(""):`<div class="empty"><div>🏅</div><b>La classifica è vuota</b><p class="muted">Gioca la prima partita e conquista il podio!</p></div>`}</section>`;
-}
+const storage={get(k,d){try{return JSON.parse(localStorage.getItem("sq2_"+k))??d}catch{return d}},set(k,v){localStorage.setItem("sq2_"+k,JSON.stringify(v))}};
+let stats=storage.get("stats",{}),scores=storage.get("scores",[]),earned=storage.get("badges",[]);
+function esc(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function subject(id){return S.find(s=>s.id===id)}
+function go(screen){state.screen=screen;render()}
+function home(){return `<section class="hero"><div class="mascot">🦉</div><h1>SUPER QUIZ 2.0</h1><p>Il gufo saggio ti accompagna nella sfida!</p><div class="chips" style="justify-content:center"><span class="chip">5 materie</span><span class="chip">5 classi</span><span class="chip">125 domande curate</span></div></section>
+<section class="panel"><label class="label">NOME DEL GIOCATORE</label><input id="name" class="field" maxlength="20" placeholder="Scrivi il tuo nome" value="${esc(state.name)}"><div style="height:14px"></div><label class="label">CLASSE</label><div class="gradegrid">${[1,2,3,4,5].map(g=>`<button class="grade ${state.grade===g?'active':''}" data-grade="${g}">${g}ª</button>`).join("")}</div></section>
+<section class="panel"><div class="title">Scegli la materia</div><div class="subjectgrid"><button class="subject ${state.subject==='mixed'?'active':''}" data-subject="mixed" style="--tint:#f0efff;--color:#6757df"><span class="emoji">🎲</span><span><b>Tutte</b><small>Modalità mista</small></span></button>${S.map(s=>`<button class="subject ${state.subject===s.id?'active':''}" data-subject="${s.id}" style="--tint:${s.t};--color:${s.c}"><span class="emoji">${s.e}</span><span><b>${s.n}</b><small>${s.d}</small></span></button>`).join("")}</div></section>
+<section class="panel"><div class="title">Livello di difficoltà</div><div class="chips">${["facile","standard","sfida"].map((d,i)=>`<button class="pill ${state.difficulty===d?'active':''}" data-diff="${d}">${["🌱 Facile","⭐ Standard","🔥 Sfida"][i]}</button>`).join("")}</div><p class="muted">Il livello modifica il numero di opzioni e la soglia dei premi.</p></section>
+<button class="btn" id="start">🚀 INIZIA LA PARTITA</button><div class="actions"><button class="btn alt" id="rank">🏆 Classifica</button><button class="btn alt" id="stats">📊 Progressi</button></div><div class="actions"><button class="btn alt" id="badges">🎖️ Collezione premi</button><button class="btn alt" id="multi">👥 Sfida a turni</button></div>`}
+function quiz(){let q=state.questions[state.index],s=subject(q.s);return `<div class="quizhead"><button class="chip" id="quit">← Esci</button><span>${state.index+1} / ${state.questions.length}</span><span>⭐ ${state.players.length?state.players[state.turn].score:state.score}</span></div><div class="bar"><span style="width:${(state.index+1)/state.questions.length*100}%"></span></div><section class="panel qbox"><div class="qemoji">${s.e}</div><div class="qmeta">${s.n.toUpperCase()} · CLASSE ${q.g}ª</div><div class="question">${q.p}</div><div class="answers">${q.opts.map((o,i)=>`<button class="answer ${state.answered&&o===q.a?'correct':''} ${state.answered&&o===state.chosen&&o!==q.a?'wrong':''}" data-answer="${esc(o)}" ${state.answered?'disabled':''}>${String.fromCharCode(65+i)}. ${esc(o)} ${state.answered&&o===q.a?'✓':state.answered&&o===state.chosen?'✕':''}</button>`).join("")}</div>${state.answered?`<div class="feedback ${state.chosen===q.a?'good':'bad'}">${state.chosen===q.a?'🎉 Esatto! Il gufo è fiero di te!':'💡 La risposta giusta è: '+esc(q.a)}<br>${esc(q.x)}</div><button class="btn" id="next">${state.index===state.questions.length-1?'🏆 VEDI IL RISULTATO':'CONTINUA →'}</button>`:''}</section><div class="muted" style="text-align:center">🦉 Un passo alla volta: imparare è una vittoria!</div>`}
+function result(){let unit=state.difficulty==="sfida"?15:10;let pct=Math.round(state.score/(state.questions.length*unit)*100),cup=pct>=90?"🏆":pct>=70?"🥇":pct>=50?"🌟":"💪";return `<section class="panel result"><div class="cup">${cup}</div><h2>Partita completata!</h2><div class="big">${state.score} punti</div><p class="muted">${pct>=90?"Incredibile! Sei un campione!":pct>=70?"Ottimo lavoro!":pct>=50?"Bravo, continua ad allenarti!":"Non mollare: ogni tentativo ti fa migliorare!"}</p><div class="chips" style="justify-content:center"><span class="chip">${esc(state.name)}</span><span class="chip">${state.grade}ª elementare</span><span class="chip">${pct}% corrette</span></div><div style="height:15px"></div><button class="btn" id="again">🔄 GIOCA ANCORA</button><div style="height:9px"></div><button class="btn alt" id="rank">🏆 CLASSIFICA</button><div style="height:9px"></div><button class="btn alt" id="home">⌂ HOME</button></section>`}
+function leaderboard(){let list=scores.filter(x=>x.grade===state.grade).sort((a,b)=>b.score-a.score).slice(0,40);return `<div class="row" style="display:flex;justify-content:space-between;align-items:center"><button class="chip" id="home">← Home</button><div class="title">🏆 Classifica ${state.grade}ª</div><button class="chip" id="reset">Reset</button></div><section class="panel">${list.length?list.map((x,i)=>`<div class="rankrow"><div class="ranknum">${i===0?'🥇':i===1?'🥈':i===2?'🥉':i+1+'.'}</div><div><div class="rankname">${esc(x.name)}</div><div class="rankmeta">${new Date(x.date).toLocaleDateString("it-IT")} · ${x.subject==="mixed"?"Tutte le materie":subject(x.subject)?.n}</div></div><div class="pts">${x.score} pt</div></div>`).join(""):`<div class="muted" style="text-align:center;padding:25px">Ancora nessun punteggio per questa classe. Inizia a giocare!</div>`}</section>`}
+function progress(){let all=Object.values(stats),total=all.reduce((a,b)=>a+b.games,0),correct=all.reduce((a,b)=>a+b.correct,0);return `<button class="chip" id="home">← Home</button><section class="panel"><div class="title">📊 I tuoi progressi</div><div class="statgrid"><div class="stat"><strong>${total}</strong><small>Partite giocate</small></div><div class="stat"><strong>${correct}</strong><small>Risposte esatte</small></div><div class="stat"><strong>${all.length?Math.round(correct/Math.max(1,all.reduce((a,b)=>a+b.total,0))*100):0}%</strong><small>Precisione generale</small></div><div class="stat"><strong>${earned.length}</strong><small>Premi conquistati</small></div></div><div class="title" style="margin-top:18px">Risultati per materia</div>${S.map(s=>{let x=stats[s.id]||{games:0,correct:0,total:0};return `<div class="rankrow"><span style="font-size:23px">${s.e}</span><div class="rankname">${s.n}<div class="rankmeta">${x.correct||0} risposte corrette · ${x.games||0} partite</div></div><div class="pts">${x.total?Math.round(x.correct/x.total*100):0}%</div></div>`}).join("")}</section>`}
+const badgeDefs=[["first","🌟","Prima stella","Completa la prima partita",()=>scores.length>=1],["ten","🎯","Occhio di falco","Ottieni almeno 70 punti",()=>scores.some(x=>x.score>=70)],["perfect","💎","Partita perfetta","Ottieni 100 punti",()=>scores.some(x=>x.score===100)],["all5","🌈","Esploratore","Gioca tutte le materie",()=>S.every(s=>(stats[s.id]?.games||0)>0)],["champ","🏆","Campione","Ottieni almeno 90 punti",()=>scores.some(x=>x.score>=90)],["streak","🔥","Sempre meglio","Completa 5 partite",()=>scores.length>=5]];
+function badgePage(){return `<button class="chip" id="home">← Home</button><section class="panel"><div class="title">🎖️ La tua collezione</div><div class="badgegrid">${badgeDefs.map(b=>{let got=earned.includes(b[0]);return `<div class="badgeitem" style="opacity:${got?1:.4}"><div class="ico">${b[1]}</div><b>${b[2]}</b><small>${got?"Conquistato":b[3]}</small></div>`}).join("")}</div></section>`}
+function multiPage(){return `<button class="chip" id="home">← Home</button><section class="panel"><div class="title">👥 Sfida a turni</div><p class="muted">Due giocatori usano lo stesso dispositivo. Ogni giocatore risponde alle stesse 5 domande, a turno. Passate il dispositivo quando compare il messaggio.</p><label class="label">GIOCATORE 1</label><input class="field" id="p1" maxlength="20" placeholder="Nome giocatore 1"><div style="height:12px"></div><label class="label">GIOCATORE 2</label><input class="field" id="p2" maxlength="20" placeholder="Nome giocatore 2"><div style="height:14px"></div><button class="btn" id="startMulti">INIZIA LA SFIDA</button></section>`}
+function render(){let v=$("#view");v.innerHTML=state.screen==="home"?home():state.screen==="quiz"?quiz():state.screen==="result"?result():state.screen==="rank"?leaderboard():state.screen==="stats"?progress():state.screen==="badges"?badgePage():multiPage();bind()}
 function bind(){
+ $("#name")?.addEventListener("input",e=>state.name=e.target.value);
  document.querySelectorAll("[data-grade]").forEach(b=>b.onclick=()=>{state.grade=+b.dataset.grade;render()});
  document.querySelectorAll("[data-subject]").forEach(b=>b.onclick=()=>{state.subject=b.dataset.subject;render()});
- const name=$("#playerName");if(name)name.oninput=()=>state.name=name.value;
- const start=$("#start");if(start)start.onclick=startGame;
- const rank=$("#leaderboard");if(rank)rank.onclick=()=>{state.screen="rank";render()};
- const how=$("#howto");if(how)how.onclick=()=>alert("Scegli il tuo nome, la classe e una materia. Rispondi a 10 domande: ogni risposta esatta vale 10 punti. Alla fine il risultato entra nella classifica di questo dispositivo.");
- const quit=$("#quit");if(quit)quit.onclick=()=>{if(confirm("Vuoi interrompere la partita?")){state.screen="home";render()}};
- document.querySelectorAll("[data-answer]").forEach(b=>b.onclick=()=>answer(b.dataset.answer));
- const next=$("#next");if(next)next.onclick=nextQuestion;
- const again=$("#again");if(again)again.onclick=startGame;
- const home=$("#home");if(home)home.onclick=()=>{state.screen="home";render()};
- const reset=$("#reset");if(reset)reset.onclick=()=>{if(confirm("Vuoi cancellare tutti i punteggi salvati su questo dispositivo?")){store.scores=[];render()}};
+ document.querySelectorAll("[data-diff]").forEach(b=>b.onclick=()=>{state.difficulty=b.dataset.diff;render()});
+ $("#start")?.addEventListener("click",startGame);$("#rank")?.addEventListener("click",()=>go("rank"));$("#stats")?.addEventListener("click",()=>go("stats"));$("#badges")?.addEventListener("click",()=>go("badges"));$("#multi")?.addEventListener("click",()=>go("multi"));
+ $("#quit")?.addEventListener("click",()=>{if(confirm("Vuoi interrompere la partita?"))go("home")});
+ document.querySelectorAll("[data-answer]").forEach(b=>b.onclick=()=>answer(b.dataset.answer));$("#next")?.addEventListener("click",next);
+ $("#again")?.addEventListener("click",startGame);$("#home")?.addEventListener("click",()=>go("home"));
+ $("#reset")?.addEventListener("click",()=>{if(confirm("Cancellare tutti i punteggi salvati su questo dispositivo?")){scores=[];storage.set("scores",scores);render()}});
+ $("#startMulti")?.addEventListener("click",startMulti);
 }
-function startGame(){
- const input=$("#playerName");if(input)state.name=input.value.trim();
- if(!state.name){alert("Scrivi il nome del giocatore prima di iniziare.");$("#playerName")?.focus();return}
- let eligible=bank.filter(x=>x.grade===state.grade);
- if(state.subject!=="mixed")eligible=eligible.filter(x=>x.subject===state.subject);
- // Garantisce un campione casuale di dieci domande senza duplicati nella partita.
- state.questions=shuffle(eligible).slice(0,10);
- if(state.subject==="mixed"){
-  const chosen=[];for(const s of subjects){const item=shuffle(eligible.filter(x=>x.subject===s))[0];if(item)chosen.push(item)}
-  const rest=shuffle(eligible.filter(x=>!chosen.includes(x))).slice(0,10-chosen.length);
-  state.questions=shuffle([...chosen,...rest]).slice(0,10);
+function startGame(){let n=$("#name")?.value.trim()||state.name.trim();if(!n){alert("Scrivi il nome del giocatore.");return}state.name=n;let pool=Q.filter(q=>q.g===state.grade&&(state.subject==="mixed"||q.s===state.subject));let chosen=[];if(state.subject==="mixed"){for(let s of S){let item=shuffle(pool.filter(q=>q.s===s))[0];if(item)chosen.push(item)}chosen=chosen.concat(shuffle(pool.filter(q=>!chosen.includes(q))).slice(0,(state.difficulty==="facile"?5:10)-chosen.length))}else chosen=shuffle(pool).slice(0,state.difficulty==="facile"?5:10);state.questions=chosen.slice(0,10).map(q=>({...q,opts:shuffle([q.a,...q.w])}));state.index=0;state.score=0;state.answered=false;state.chosen=null;state.players=[];go("quiz")}
+function answer(val){if(state.answered)return;state.chosen=val;state.answered=true;let q=state.questions[state.index];if(val===q.a){state.score+=state.difficulty==="sfida"?15:10;beep(true)}else beep(false);render()}
+function next(){
+ let q=state.questions[state.index];
+ if(state.players.length){
+   if(state.chosen===q.a)state.players[state.turn].score+=10;
+   if(state.turn===0){state.turn=1;multiTurn();return}
+   state.turn=0;
+   if(state.index<state.questions.length-1){state.index++;state.answered=false;state.chosen=null;multiTurn();return}
+   let [a,b]=state.players;let winner=a.score===b.score?"Pareggio!":a.score>b.score?a.name+" vince!":b.name+" vince!";
+   $("#view").innerHTML=`<section class="panel result"><div class="cup">🏆</div><h2>${winner}</h2><div class="statgrid"><div class="stat"><strong>${a.score}</strong><small>${esc(a.name)} · punti</small></div><div class="stat"><strong>${b.score}</strong><small>${esc(b.name)} · punti</small></div></div><div style="height:14px"></div><button class="btn" id="home">TORNA ALLA HOME</button></section>`;$("#home").onclick=()=>{state.players=[];go("home")};return;
  }
- state.index=0;state.score=0;state.chosen=null;state.answered=false;state.screen="quiz";render();
+ let st=stats[q.s]||{games:0,correct:0,total:0};st.total++;if(state.chosen===q.a)st.correct++;stats[q.s]=st;storage.set("stats",stats);
+ if(state.index<state.questions.length-1){state.index++;state.answered=false;state.chosen=null;render()}else finish()
 }
-function answer(value){if(state.answered)return;state.chosen=value;state.answered=true;if(value===state.questions[state.index].answer){state.score+=10;beep(true)}else beep(false);render()}
-function nextQuestion(){if(state.index<9){state.index++;state.chosen=null;state.answered=false;render()}else{const list=store.scores;list.push({name:state.name,grade:state.grade,points:state.score,date:new Date().toISOString()});store.scores=list;state.screen="result";render()}}
-function beep(ok){if(!state.sound)return;try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return;const c=new C(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=ok?660:220;g.gain.value=.06;o.start();o.stop(c.currentTime+.12)}catch{}}
-function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-$("#soundToggle").onclick=()=>{state.sound=!state.sound;$("#soundToggle").textContent=state.sound?"🔊":"🔇"};
+function finish(){let item={name:state.name,grade:state.grade,score:state.score,subject:state.subject,date:new Date().toISOString()};scores.push(item);storage.set("scores",scores);for(const sid of new Set(state.questions.map(q=>q.s))){let st=stats[sid]||{games:0,correct:0,total:0};st.games++;stats[sid]=st}storage.set("stats",stats);for(let b of badgeDefs)if(b[4]()&&!earned.includes(b[0]))earned.push(b[0]);storage.set("badges",earned);go("result")}
+function startMulti(){let a=$("#p1").value.trim(),b=$("#p2").value.trim();if(!a||!b){alert("Inserisci i nomi di entrambi i giocatori.");return}state.players=[{name:a,score:0},{name:b,score:0}];state.turn=0;state.questions=shuffle(Q.filter(q=>q.g===state.grade)).slice(0,5).map(q=>({...q,opts:shuffle([q.a,...q.w])}));state.index=0;state.score=0;state.answered=false;state.chosen=null;multiTurn()}
+function multiTurn(){let p=state.players[state.turn];$("#view").innerHTML=`<section class="panel result"><div class="cup">🔄</div><h2>Turno di ${esc(p.name)}</h2><p>Passa il dispositivo a ${esc(p.name)} e premi quando sei pronto.</p><button class="btn" id="ready">SONO PRONTO</button></section>`;$("#ready").onclick=()=>{state.screen="quiz";render()}}
+function beep(ok){if(!state.sound)return;try{let C=window.AudioContext||window.webkitAudioContext,c=new C(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=ok?680:230;g.gain.value=.05;o.start();o.stop(c.currentTime+.12)}catch{}}
+$("#themeBtn").onclick=()=>{document.body.classList.toggle("dark");let dark=document.body.classList.contains("dark");localStorage.setItem("sq2_theme",dark?"dark":"light");$("#themeBtn").textContent=dark?"☀️":"🌙"};
+$("#soundBtn").onclick=()=>{state.sound=!state.sound;$("#soundBtn").textContent=state.sound?"🔊":"🔇"};
+if(localStorage.getItem("sq2_theme")==="dark"){document.body.classList.add("dark");$("#themeBtn").textContent="☀️"}
 render();
-if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
