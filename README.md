@@ -39,3 +39,7 @@ La versione audio aggiunge effetti sintetizzati tramite Web Audio API, senza fil
 - passaggio alla domanda successiva;
 - conclusione, vittoria e conquista medaglie.
 Il controllo 🔊/🔇 disattiva o riattiva gli effetti. Su iPhone/iPad l'audio viene avviato in seguito a un'interazione dell'utente, come richiesto da Safari.
+
+
+## Correzione jingle di apertura
+Su iOS/iPadOS Safari non consente di riprodurre audio automaticamente al caricamento della pagina. Il jingle iniziale viene quindi avviato al primo tocco/tasto dell'utente, dopo lo sblocco dell'AudioContext. La cache offline è stata aggiornata a `super-quiz-v4-opening`.

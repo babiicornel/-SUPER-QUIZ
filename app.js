@@ -179,6 +179,25 @@ function playSound(name){
    at+=duration*.82;
  });
 }
+// iOS Safari blocca l'audio automatico all'apertura della pagina.
+// Sblocchiamo l'AudioContext e riproduciamo il jingle al primo tocco dell'utente.
+let introJinglePlayed=false;
+function playOpeningJingle(){
+ if(introJinglePlayed)return;
+ introJinglePlayed=true;
+ if(!state.sound)return;
+ const ctx=getAudioContext();
+ if(!ctx)return;
+ if(ctx.state==="suspended"){
+   ctx.resume().then(()=>playSound("start")).catch(()=>{});
+ }else{
+   playSound("start");
+ }
+}
+document.addEventListener("pointerdown",playOpeningJingle,{once:true,capture:true});
+document.addEventListener("touchstart",playOpeningJingle,{once:true,capture:true});
+document.addEventListener("keydown",playOpeningJingle,{once:true,capture:true});
+
 $("#themeBtn").onclick=()=>{document.body.classList.toggle("dark");let dark=document.body.classList.contains("dark");localStorage.setItem("sq2_theme",dark?"dark":"light");$("#themeBtn").textContent=dark?"☀️":"🌙"};
 $("#soundBtn").onclick=()=>{state.sound=!state.sound;$("#soundBtn").textContent=state.sound?"🔊":"🔇";if(state.sound)playSound("select")};
 if(localStorage.getItem("sq2_theme")==="dark"){document.body.classList.add("dark");$("#themeBtn").textContent="☀️"}
