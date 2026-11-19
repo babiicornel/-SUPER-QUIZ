@@ -103,7 +103,27 @@ function home(){return `<section class="hero"><div class="mascot">🦉</div><h1>
 <section class="panel"><div class="title">Scegli la materia</div><div class="subjectgrid"><button class="subject ${state.subject==='mixed'?'active':''}" data-subject="mixed" style="--tint:#f0efff;--color:#6757df"><span class="emoji">🎲</span><span><b>Tutte</b><small>Modalità mista</small></span></button>${S.map(s=>`<button class="subject ${state.subject===s.id?'active':''}" data-subject="${s.id}" style="--tint:${s.t};--color:${s.c}"><span class="emoji">${s.e}</span><span><b>${s.n}</b><small>${s.d}</small></span></button>`).join("")}</div></section>
 <section class="panel"><div class="title">Livello di difficoltà</div><div class="chips">${["facile","standard","sfida"].map((d,i)=>`<button class="pill ${state.difficulty===d?'active':''}" data-diff="${d}">${["🌱 Facile","⭐ Standard","🔥 Sfida"][i]}</button>`).join("")}</div><p class="muted">Il livello modifica il numero di opzioni e la soglia dei premi.</p></section>
 <button class="btn" id="start">🚀 INIZIA LA PARTITA</button><div class="actions"><button class="btn alt" id="rank">🏆 Classifica</button><button class="btn alt" id="stats">📊 Progressi</button></div><div class="actions"><button class="btn alt" id="badges">🎖️ Collezione premi</button><button class="btn alt" id="multi">👥 Sfida a turni</button></div>`}
-function quiz(){let q=state.questions[state.index],s=subject(q.s);return `<div class="quizhead"><button class="chip" id="quit">← Esci</button><span>${state.index+1} / ${state.questions.length}</span><span>⭐ ${state.players.length?state.players[state.turn].score:state.score}</span></div><div class="bar"><span style="width:${(state.index+1)/state.questions.length*100}%"></span></div><section class="panel qbox"><div class="qemoji">${s.e}</div><div class="qmeta">${s.n.toUpperCase()} · CLASSE ${q.g}ª</div><div class="question">${q.p}</div><div class="answers">${q.opts.map((o,i)=>`<button class="answer ${state.answered&&o===q.a?'correct':''} ${state.answered&&o===state.chosen&&o!==q.a?'wrong':''}" data-answer="${esc(o)}" ${state.answered?'disabled':''}>${String.fromCharCode(65+i)}. ${esc(o)} ${state.answered&&o===q.a?'✓':state.answered&&o===state.chosen?'✕':''}</button>`).join("")}</div>${state.answered?`<div class="feedback ${state.chosen===q.a?'good':'bad'}">${state.chosen===q.a?'🎉 Esatto! Il gufo è fiero di te!':'💡 La risposta giusta è: '+esc(q.a)}<br>${esc(q.x)}</div><button class="btn" id="next">${state.index===state.questions.length-1?'🏆 VEDI IL RISULTATO':'CONTINUA →'}</button>`:''}</section><div class="muted" style="text-align:center">🦉 Un passo alla volta: imparare è una vittoria!</div>`}
+function studyTip(q){
+ const tips={
+  math:"Leggi con calma i dati, individua l'operazione necessaria e controlla il risultato con una stima o con l'operazione inversa.",
+  science:"Collega la risposta alla caratteristica osservabile o alla funzione dell'organismo, del fenomeno o dell'ambiente descritto.",
+  italian:"Osserva il significato della frase e il ruolo della parola: chiediti che cosa indica e quale funzione svolge.",
+  geo:"Prova a collegare il nome al luogo sulla carta geografica e ricorda le caratteristiche che distinguono quel territorio.",
+  geometry:"Immagina o disegna la figura, conta lati e vertici e scegli la proprietà o la formula adatta."
+ };
+ return tips[q.s]||"Rileggi la domanda, individua le informazioni importanti e prova a spiegare a parole perché la risposta è corretta.";
+}
+function practiceTip(q){
+ const tips={
+  math:"Riprova con numeri più piccoli o scomponi il calcolo in passaggi. Alla fine verifica se il risultato è plausibile.",
+  science:"Ripeti la domanda usando le parole 'perché' e 'come': spiegare il fenomeno aiuta a ricordarlo.",
+  italian:"Leggi la frase ad alta voce e sostituisci la parola con un'altra: verifica se il significato e la grammatica restano corretti.",
+  geo:"Pensa a una carta dell'Italia o del mondo e prova a indicare la posizione prima di scegliere.",
+  geometry:"Fai un piccolo disegno e segna le misure. Se serve, scrivi prima la formula e poi sostituisci i numeri."
+ };
+ return tips[q.s]||"Rileggi la spiegazione e prova a rispondere di nuovo senza guardare la soluzione.";
+}
+function quiz(){let q=state.questions[state.index],s=subject(q.s);return `<div class="quizhead"><button class="chip" id="quit">← Esci</button><span>${state.index+1} / ${state.questions.length}</span><span>⭐ ${state.players.length?state.players[state.turn].score:state.score}</span></div><div class="bar"><span style="width:${(state.index+1)/state.questions.length*100}%"></span></div><section class="panel qbox"><div class="qemoji">${s.e}</div><div class="qmeta">${s.n.toUpperCase()} · CLASSE ${q.g}ª</div><div class="question">${q.p}</div><div class="answers">${q.opts.map((o,i)=>`<button class="answer ${state.answered&&o===q.a?'correct':''} ${state.answered&&o===state.chosen&&o!==q.a?'wrong':''}" data-answer="${esc(o)}" ${state.answered?'disabled':''}>${String.fromCharCode(65+i)}. ${esc(o)} ${state.answered&&o===q.a?'✓':state.answered&&o===state.chosen?'✕':''}</button>`).join("")}</div>${state.answered?`<div class="feedback ${state.chosen===q.a?'good':'bad'}">${state.chosen===q.a?`🎉 Esatto! Il gufo è fiero di te!<br><strong>Perché è giusta?</strong> ${esc(q.x)}`:`💡 La risposta corretta è: <strong>${esc(q.a)}</strong><div class="explain"><strong>🦉 Vediamo insieme</strong><p>${esc(q.x)}</p><strong>📘 Da ricordare</strong><p>${esc(studyTip(q))}</p><strong>💪 Prova a fare così</strong><p>${esc(practiceTip(q))}</p></div>`}</div><button class="btn" id="next">${state.index===state.questions.length-1?'🏆 VEDI IL RISULTATO':'CONTINUA →'}</button>`:''}</section><div class="muted" style="text-align:center">🦉 Un passo alla volta: imparare è una vittoria!</div>`}
 function result(){let unit=state.difficulty==="sfida"?15:10;let pct=Math.round(state.score/(state.questions.length*unit)*100),cup=pct>=90?"🏆":pct>=70?"🥇":pct>=50?"🌟":"💪";return `<section class="panel result"><div class="cup">${cup}</div><h2>Partita completata!</h2><div class="big">${state.score} punti</div><p class="muted">${pct>=90?"Incredibile! Sei un campione!":pct>=70?"Ottimo lavoro!":pct>=50?"Bravo, continua ad allenarti!":"Non mollare: ogni tentativo ti fa migliorare!"}</p><div class="chips" style="justify-content:center"><span class="chip">${esc(state.name)}</span><span class="chip">${state.grade}ª elementare</span><span class="chip">${pct}% corrette</span></div><div style="height:15px"></div><button class="btn" id="again">🔄 GIOCA ANCORA</button><div style="height:9px"></div><button class="btn alt" id="rank">🏆 CLASSIFICA</button><div style="height:9px"></div><button class="btn alt" id="home">⌂ HOME</button></section>`}
 function leaderboard(){let list=scores.filter(x=>x.grade===state.grade).sort((a,b)=>b.score-a.score).slice(0,40);return `<div class="row" style="display:flex;justify-content:space-between;align-items:center"><button class="chip" id="home">← Home</button><div class="title">🏆 Classifica ${state.grade}ª</div><button class="chip" id="reset">Reset</button></div><section class="panel">${list.length?list.map((x,i)=>`<div class="rankrow"><div class="ranknum">${i===0?'🥇':i===1?'🥈':i===2?'🥉':i+1+'.'}</div><div><div class="rankname">${esc(x.name)}</div><div class="rankmeta">${new Date(x.date).toLocaleDateString("it-IT")} · ${x.subject==="mixed"?"Tutte le materie":subject(x.subject)?.n}</div></div><div class="pts">${x.score} pt</div></div>`).join(""):`<div class="muted" style="text-align:center;padding:25px">Ancora nessun punteggio per questa classe. Inizia a giocare!</div>`}</section>`}
 function progress(){let all=Object.values(stats),total=all.reduce((a,b)=>a+b.games,0),correct=all.reduce((a,b)=>a+b.correct,0);return `<button class="chip" id="home">← Home</button><section class="panel"><div class="title">📊 I tuoi progressi</div><div class="statgrid"><div class="stat"><strong>${total}</strong><small>Partite giocate</small></div><div class="stat"><strong>${correct}</strong><small>Risposte esatte</small></div><div class="stat"><strong>${all.length?Math.round(correct/Math.max(1,all.reduce((a,b)=>a+b.total,0))*100):0}%</strong><small>Precisione generale</small></div><div class="stat"><strong>${earned.length}</strong><small>Premi conquistati</small></div></div><div class="title" style="margin-top:18px">Risultati per materia</div>${S.map(s=>{let x=stats[s.id]||{games:0,correct:0,total:0};return `<div class="rankrow"><span style="font-size:23px">${s.e}</span><div class="rankname">${s.n}<div class="rankmeta">${x.correct||0} risposte corrette · ${x.games||0} partite</div></div><div class="pts">${x.total?Math.round(x.correct/x.total*100):0}%</div></div>`}).join("")}</section>`}
@@ -152,31 +172,42 @@ function getAudioContext(){
  }catch{return null}
 }
 const soundPatterns={
- tap:[[520,.055,"sine"]],
- select:[[520,.07,"sine"],[740,.09,"sine"]],
- start:[[523,.12,"triangle"],[659,.12,"triangle"],[784,.16,"triangle"],[1047,.22,"sine"]],
- correct:[[659,.09,"sine"],[784,.09,"sine"],[988,.13,"sine"],[1319,.2,"triangle"]],
- wrong:[[330,.12,"triangle"],[277,.16,"sine"]],
- next:[[587,.07,"sine"],[784,.11,"sine"]],
- finish:[[784,.12,"triangle"],[659,.12,"triangle"],[523,.22,"sine"]],
- victory:[[523,.11,"triangle"],[659,.11,"triangle"],[784,.11,"triangle"],[1047,.18,"triangle"],[1319,.28,"sine"]],
- badge:[[784,.1,"sine"],[988,.1,"sine"],[1175,.1,"triangle"],[1568,.3,"triangle"]],
- turn:[[440,.1,"sine"],[554,.1,"sine"],[659,.16,"triangle"]]
+ tap:[[660,.075,"sine"],[990,.055,"sine"]],
+ select:[[523,.09,"sine"],[659,.09,"sine"],[784,.13,"sine"]],
+ start:[[523,.14,"triangle"],[659,.14,"triangle"],[784,.16,"triangle"],[1047,.24,"sine"],[1319,.18,"sine"]],
+ correct:[[659,.11,"sine"],[784,.11,"sine"],[988,.14,"sine"],[1319,.2,"sine"],[1568,.17,"triangle"]],
+ wrong:[[392,.12,"triangle"],[330,.15,"sine"],[262,.2,"sine"]],
+ next:[[587,.09,"sine"],[784,.1,"triangle"],[988,.12,"sine"]],
+ finish:[[784,.14,"triangle"],[659,.14,"triangle"],[523,.24,"sine"],[659,.18,"sine"]],
+ victory:[[523,.14,"triangle"],[659,.14,"triangle"],[784,.14,"triangle"],[1047,.2,"sine"],[1319,.22,"sine"],[1568,.3,"sine"]],
+ badge:[[784,.12,"sine"],[988,.12,"sine"],[1175,.14,"sine"],[1568,.22,"triangle"],[1760,.3,"sine"]],
+ turn:[[440,.12,"sine"],[554,.12,"sine"],[659,.18,"triangle"],[880,.14,"sine"]]
 };
 function playSound(name){
  if(!state.sound)return;
  const ctx=getAudioContext();if(!ctx)return;
  const pattern=soundPatterns[name]||soundPatterns.tap;
- let at=ctx.currentTime+.015;
- pattern.forEach(([freq,duration,wave])=>{
-   const osc=ctx.createOscillator(),gain=ctx.createGain();
-   osc.type=wave;osc.frequency.setValueAtTime(freq,at);
-   gain.gain.setValueAtTime(.0001,at);
-   gain.gain.exponentialRampToValueAtTime(.075,at+.012);
-   gain.gain.exponentialRampToValueAtTime(.0001,at+duration);
-   osc.connect(gain);gain.connect(ctx.destination);
-   osc.start(at);osc.stop(at+duration+.02);
-   at+=duration*.82;
+ let at=ctx.currentTime+.02;
+ pattern.forEach(([freq,duration,wave],i)=>{
+   // Main note plus a quiet octave/harmonic gives a fuller, bell-like sound.
+   const voices=[
+     {f:freq,type:wave,level:.060,detune:0},
+     {f:freq*2,type:"sine",level:.018,detune:2},
+     {f:freq*.5,type:"triangle",level:.012,detune:-2}
+   ];
+   voices.forEach(v=>{
+     const osc=ctx.createOscillator(),gain=ctx.createGain();
+     osc.type=v.type;
+     osc.frequency.setValueAtTime(v.f,at);
+     osc.detune.setValueAtTime(v.detune,at);
+     gain.gain.setValueAtTime(.0001,at);
+     gain.gain.exponentialRampToValueAtTime(v.level,at+.018);
+     gain.gain.exponentialRampToValueAtTime(v.level*.55,at+duration*.48);
+     gain.gain.exponentialRampToValueAtTime(.0001,at+duration);
+     osc.connect(gain);gain.connect(ctx.destination);
+     osc.start(at);osc.stop(at+duration+.025);
+   });
+   at+=duration*.78;
  });
 }
 // iOS Safari blocca l'audio automatico all'apertura della pagina.

@@ -43,3 +43,10 @@ Il controllo 🔊/🔇 disattiva o riattiva gli effetti. Su iPhone/iPad l'audio 
 
 ## Correzione jingle di apertura
 Su iOS/iPadOS Safari non consente di riprodurre audio automaticamente al caricamento della pagina. Il jingle iniziale viene quindi avviato al primo tocco/tasto dell'utente, dopo lo sblocco dell'AudioContext. La cache offline è stata aggiornata a `super-quiz-v4-opening`.
+
+
+## Miglioramento audio e spiegazioni didattiche
+- Effetti sonori più ricchi, con armoniche sovrapposte e inviluppi più morbidi: selezione, risposta corretta/errata, avanzamento, vittoria, medaglia e cambio turno.
+- Per ogni risposta errata, la schermata mostra la soluzione, la spiegazione associata alla domanda, un consiglio di studio specifico per materia e un suggerimento pratico per ragionare la prossima volta.
+- Per le risposte corrette viene mantenuta una conferma con spiegazione breve.
+- Cache offline aggiornata a `super-quiz-v5-audio-explanations`.
