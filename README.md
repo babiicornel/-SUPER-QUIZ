@@ -29,3 +29,13 @@ I nomi, i punteggi, le statistiche e i premi sono salvati localmente nel browser
 
 ## Limiti noti della build 2.0
 La modalità sfida è locale e a turni sullo stesso dispositivo, non multiplayer online. Le modalità facile/standard/sfida modificano durata e punteggio, mentre il livello didattico è associato alla classe selezionata; non è ancora un sistema adattivo. Prima di un uso didattico ufficiale, rivedere i contenuti con un insegnante.
+
+
+## Aggiornamento audio
+La versione audio aggiunge effetti sintetizzati tramite Web Audio API, senza file audio esterni:
+- selezione classe/materia e pulsanti;
+- avvio partita e cambio turno;
+- risposta corretta e risposta errata;
+- passaggio alla domanda successiva;
+- conclusione, vittoria e conquista medaglie.
+Il controllo 🔊/🔇 disattiva o riattiva gli effetti. Su iPhone/iPad l'audio viene avviato in seguito a un'interazione dell'utente, come richiesto da Safari.

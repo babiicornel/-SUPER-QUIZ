@@ -113,9 +113,9 @@ function multiPage(){return `<button class="chip" id="home">← Home</button><se
 function render(){let v=$("#view");v.innerHTML=state.screen==="home"?home():state.screen==="quiz"?quiz():state.screen==="result"?result():state.screen==="rank"?leaderboard():state.screen==="stats"?progress():state.screen==="badges"?badgePage():multiPage();bind()}
 function bind(){
  $("#name")?.addEventListener("input",e=>state.name=e.target.value);
- document.querySelectorAll("[data-grade]").forEach(b=>b.onclick=()=>{state.grade=+b.dataset.grade;render()});
- document.querySelectorAll("[data-subject]").forEach(b=>b.onclick=()=>{state.subject=b.dataset.subject;render()});
- document.querySelectorAll("[data-diff]").forEach(b=>b.onclick=()=>{state.difficulty=b.dataset.diff;render()});
+ document.querySelectorAll("[data-grade]").forEach(b=>b.onclick=()=>{state.grade=+b.dataset.grade;playSound("tap");render()});
+ document.querySelectorAll("[data-subject]").forEach(b=>b.onclick=()=>{state.subject=b.dataset.subject;playSound("select");render()});
+ document.querySelectorAll("[data-diff]").forEach(b=>b.onclick=()=>{state.difficulty=b.dataset.diff;playSound("tap");render()});
  $("#start")?.addEventListener("click",startGame);$("#rank")?.addEventListener("click",()=>go("rank"));$("#stats")?.addEventListener("click",()=>go("stats"));$("#badges")?.addEventListener("click",()=>go("badges"));$("#multi")?.addEventListener("click",()=>go("multi"));
  $("#quit")?.addEventListener("click",()=>{if(confirm("Vuoi interrompere la partita?"))go("home")});
  document.querySelectorAll("[data-answer]").forEach(b=>b.onclick=()=>answer(b.dataset.answer));$("#next")?.addEventListener("click",next);
@@ -123,27 +123,64 @@ function bind(){
  $("#reset")?.addEventListener("click",()=>{if(confirm("Cancellare tutti i punteggi salvati su questo dispositivo?")){scores=[];storage.set("scores",scores);render()}});
  $("#startMulti")?.addEventListener("click",startMulti);
 }
-function startGame(){let n=$("#name")?.value.trim()||state.name.trim();if(!n){alert("Scrivi il nome del giocatore.");return}state.name=n;let pool=Q.filter(q=>q.g===state.grade&&(state.subject==="mixed"||q.s===state.subject));let chosen=[];if(state.subject==="mixed"){for(let s of S){let item=shuffle(pool.filter(q=>q.s===s))[0];if(item)chosen.push(item)}chosen=chosen.concat(shuffle(pool.filter(q=>!chosen.includes(q))).slice(0,(state.difficulty==="facile"?5:10)-chosen.length))}else chosen=shuffle(pool).slice(0,state.difficulty==="facile"?5:10);state.questions=chosen.slice(0,10).map(q=>({...q,opts:shuffle([q.a,...q.w])}));state.index=0;state.score=0;state.answered=false;state.chosen=null;state.players=[];go("quiz")}
-function answer(val){if(state.answered)return;state.chosen=val;state.answered=true;let q=state.questions[state.index];if(val===q.a){state.score+=state.difficulty==="sfida"?15:10;beep(true)}else beep(false);render()}
+function startGame(){let n=$("#name")?.value.trim()||state.name.trim();if(!n){alert("Scrivi il nome del giocatore.");return}state.name=n;let pool=Q.filter(q=>q.g===state.grade&&(state.subject==="mixed"||q.s===state.subject));let chosen=[];if(state.subject==="mixed"){for(let s of S){let item=shuffle(pool.filter(q=>q.s===s))[0];if(item)chosen.push(item)}chosen=chosen.concat(shuffle(pool.filter(q=>!chosen.includes(q))).slice(0,(state.difficulty==="facile"?5:10)-chosen.length))}else chosen=shuffle(pool).slice(0,state.difficulty==="facile"?5:10);state.questions=chosen.slice(0,10).map(q=>({...q,opts:shuffle([q.a,...q.w])}));state.index=0;state.score=0;state.answered=false;state.chosen=null;state.players=[];playSound("start");go("quiz")}
+function answer(val){if(state.answered)return;state.chosen=val;state.answered=true;let q=state.questions[state.index];if(val===q.a){state.score+=state.difficulty==="sfida"?15:10;playSound("correct")}else playSound("wrong");render()}
 function next(){
  let q=state.questions[state.index];
  if(state.players.length){
    if(state.chosen===q.a)state.players[state.turn].score+=10;
-   if(state.turn===0){state.turn=1;multiTurn();return}
+   if(state.turn===0){state.turn=1;playSound("turn");multiTurn();return}
    state.turn=0;
-   if(state.index<state.questions.length-1){state.index++;state.answered=false;state.chosen=null;multiTurn();return}
+   if(state.index<state.questions.length-1){state.index++;state.answered=false;state.chosen=null;playSound("next");multiTurn();return}
    let [a,b]=state.players;let winner=a.score===b.score?"Pareggio!":a.score>b.score?a.name+" vince!":b.name+" vince!";
-   $("#view").innerHTML=`<section class="panel result"><div class="cup">🏆</div><h2>${winner}</h2><div class="statgrid"><div class="stat"><strong>${a.score}</strong><small>${esc(a.name)} · punti</small></div><div class="stat"><strong>${b.score}</strong><small>${esc(b.name)} · punti</small></div></div><div style="height:14px"></div><button class="btn" id="home">TORNA ALLA HOME</button></section>`;$("#home").onclick=()=>{state.players=[];go("home")};return;
+   playSound(a.score===b.score?"finish":"victory");$("#view").innerHTML=`<section class="panel result"><div class="cup">🏆</div><h2>${winner}</h2><div class="statgrid"><div class="stat"><strong>${a.score}</strong><small>${esc(a.name)} · punti</small></div><div class="stat"><strong>${b.score}</strong><small>${esc(b.name)} · punti</small></div></div><div style="height:14px"></div><button class="btn" id="home">TORNA ALLA HOME</button></section>`;$("#home").onclick=()=>{state.players=[];go("home")};return;
  }
  let st=stats[q.s]||{games:0,correct:0,total:0};st.total++;if(state.chosen===q.a)st.correct++;stats[q.s]=st;storage.set("stats",stats);
- if(state.index<state.questions.length-1){state.index++;state.answered=false;state.chosen=null;render()}else finish()
+ if(state.index<state.questions.length-1){state.index++;state.answered=false;state.chosen=null;playSound("next");render()}else finish()
 }
-function finish(){let item={name:state.name,grade:state.grade,score:state.score,subject:state.subject,date:new Date().toISOString()};scores.push(item);storage.set("scores",scores);for(const sid of new Set(state.questions.map(q=>q.s))){let st=stats[sid]||{games:0,correct:0,total:0};st.games++;stats[sid]=st}storage.set("stats",stats);for(let b of badgeDefs)if(b[4]()&&!earned.includes(b[0]))earned.push(b[0]);storage.set("badges",earned);go("result")}
-function startMulti(){let a=$("#p1").value.trim(),b=$("#p2").value.trim();if(!a||!b){alert("Inserisci i nomi di entrambi i giocatori.");return}state.players=[{name:a,score:0},{name:b,score:0}];state.turn=0;state.questions=shuffle(Q.filter(q=>q.g===state.grade)).slice(0,5).map(q=>({...q,opts:shuffle([q.a,...q.w])}));state.index=0;state.score=0;state.answered=false;state.chosen=null;multiTurn()}
+function finish(){let item={name:state.name,grade:state.grade,score:state.score,subject:state.subject,date:new Date().toISOString()};scores.push(item);storage.set("scores",scores);for(const sid of new Set(state.questions.map(q=>q.s))){let st=stats[sid]||{games:0,correct:0,total:0};st.games++;stats[sid]=st}storage.set("stats",stats);let newBadge=false;for(let b of badgeDefs)if(b[4]()&&!earned.includes(b[0])){earned.push(b[0]);newBadge=true}storage.set("badges",earned);playSound(newBadge?"badge":(state.score>=70?"victory":"finish"));go("result")}
+function startMulti(){let a=$("#p1").value.trim(),b=$("#p2").value.trim();if(!a||!b){alert("Inserisci i nomi di entrambi i giocatori.");return}state.players=[{name:a,score:0},{name:b,score:0}];state.turn=0;state.questions=shuffle(Q.filter(q=>q.g===state.grade)).slice(0,5).map(q=>({...q,opts:shuffle([q.a,...q.w])}));state.index=0;state.score=0;state.answered=false;state.chosen=null;playSound("start");multiTurn()}
 function multiTurn(){let p=state.players[state.turn];$("#view").innerHTML=`<section class="panel result"><div class="cup">🔄</div><h2>Turno di ${esc(p.name)}</h2><p>Passa il dispositivo a ${esc(p.name)} e premi quando sei pronto.</p><button class="btn" id="ready">SONO PRONTO</button></section>`;$("#ready").onclick=()=>{state.screen="quiz";render()}}
-function beep(ok){if(!state.sound)return;try{let C=window.AudioContext||window.webkitAudioContext,c=new C(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=ok?680:230;g.gain.value=.05;o.start();o.stop(c.currentTime+.12)}catch{}}
+let audioCtx=null;
+function getAudioContext(){
+ try{
+   const C=window.AudioContext||window.webkitAudioContext;
+   if(!C)return null;
+   if(!audioCtx)audioCtx=new C();
+   if(audioCtx.state==="suspended")audioCtx.resume();
+   return audioCtx;
+ }catch{return null}
+}
+const soundPatterns={
+ tap:[[520,.055,"sine"]],
+ select:[[520,.07,"sine"],[740,.09,"sine"]],
+ start:[[523,.12,"triangle"],[659,.12,"triangle"],[784,.16,"triangle"],[1047,.22,"sine"]],
+ correct:[[659,.09,"sine"],[784,.09,"sine"],[988,.13,"sine"],[1319,.2,"triangle"]],
+ wrong:[[330,.12,"triangle"],[277,.16,"sine"]],
+ next:[[587,.07,"sine"],[784,.11,"sine"]],
+ finish:[[784,.12,"triangle"],[659,.12,"triangle"],[523,.22,"sine"]],
+ victory:[[523,.11,"triangle"],[659,.11,"triangle"],[784,.11,"triangle"],[1047,.18,"triangle"],[1319,.28,"sine"]],
+ badge:[[784,.1,"sine"],[988,.1,"sine"],[1175,.1,"triangle"],[1568,.3,"triangle"]],
+ turn:[[440,.1,"sine"],[554,.1,"sine"],[659,.16,"triangle"]]
+};
+function playSound(name){
+ if(!state.sound)return;
+ const ctx=getAudioContext();if(!ctx)return;
+ const pattern=soundPatterns[name]||soundPatterns.tap;
+ let at=ctx.currentTime+.015;
+ pattern.forEach(([freq,duration,wave])=>{
+   const osc=ctx.createOscillator(),gain=ctx.createGain();
+   osc.type=wave;osc.frequency.setValueAtTime(freq,at);
+   gain.gain.setValueAtTime(.0001,at);
+   gain.gain.exponentialRampToValueAtTime(.075,at+.012);
+   gain.gain.exponentialRampToValueAtTime(.0001,at+duration);
+   osc.connect(gain);gain.connect(ctx.destination);
+   osc.start(at);osc.stop(at+duration+.02);
+   at+=duration*.82;
+ });
+}
 $("#themeBtn").onclick=()=>{document.body.classList.toggle("dark");let dark=document.body.classList.contains("dark");localStorage.setItem("sq2_theme",dark?"dark":"light");$("#themeBtn").textContent=dark?"☀️":"🌙"};
-$("#soundBtn").onclick=()=>{state.sound=!state.sound;$("#soundBtn").textContent=state.sound?"🔊":"🔇"};
+$("#soundBtn").onclick=()=>{state.sound=!state.sound;$("#soundBtn").textContent=state.sound?"🔊":"🔇";if(state.sound)playSound("select")};
 if(localStorage.getItem("sq2_theme")==="dark"){document.body.classList.add("dark");$("#themeBtn").textContent="☀️"}
 render();
 if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
