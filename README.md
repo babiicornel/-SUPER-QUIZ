@@ -1,52 +1,24 @@
-# SUPER QUIZ 2.0 — PWA iPhone/iPad
+# SUPER QUIZ 3.0 — PWA iPhone/iPad
 
-Aggiornamento della PWA esistente. Mantiene l'installazione Safari/GitHub Pages e aggiorna la cache offline alla versione `super-quiz-v2`.
+Aggiornamento compatibile con la PWA già pubblicata su GitHub Pages. Mantiene lo stesso indirizzo, la stessa struttura dei file e i dati locali già presenti nel browser.
 
-## Funzioni incluse
-- Tema chiaro/scuro selezionabile.
-- Mascotte gufo con animazione CSS.
-- 5 materie e classi 1ª–5ª.
-- 125 domande curate, 5 per materia per ogni classe.
-- Tre modalità: facile (5 domande), standard (10 domande), sfida (10 domande con 15 punti per risposta esatta). La difficoltà dei contenuti è comunque differenziata in base alla classe.
-- Modalità mista o materia singola.
-- Punteggio e spiegazione immediata.
-- Classifica locale filtrata per classe.
-- Statistiche locali per materia.
-- Collezione di medaglie/obiettivi.
-- Sfida a turni per due giocatori sullo stesso dispositivo.
-- Effetti sonori sintetizzati e disattivabili.
-- Memorizzazione locale e cache offline.
+## Novità della versione 3.0
+- 200 domande: 5 materie × 5 classi, con 8 quesiti per ogni combinazione classe/materia.
+- Nuova schermata **I cinque mondi dell'apprendimento**, con accesso diretto a Matematica, Scienze, Italiano, Geografia e Geometria.
+- Riepilogo dei progressi per materia nei mondi, basato sulle risposte registrate sul dispositivo.
+- Conservati tema chiaro/scuro, effetti sonori, spiegazioni, classifica locale, statistiche, premi e sfida a turni.
+- Cache offline aggiornata a `super-quiz-v6-worlds-200q`.
 
-## Aggiornare GitHub Pages da iPhone
-1. Apri il repository GitHub `babiicornel/-SUPER-QUIZ`.
-2. Per ciascun file esistente (`index.html`, `style.css`, `app.js`, `manifest.webmanifest`, `sw.js`, `icon-192.png`, `icon-512.png`, `README.md`), apri il file, scegli modifica o sostituisci e carica/incolla la versione corrispondente di questa cartella. È importante sostituire i file, non creare una seconda copia in sottocartella.
-3. Crea un commit sulla branch `main`.
-4. Attendi la nuova pubblicazione GitHub Pages.
-5. Su iPhone/iPad chiudi la PWA e riapri il sito con Safari e connessione Internet. Il service worker `super-quiz-v2` sostituisce la cache precedente; se compare ancora la versione vecchia, chiudi la PWA, ricarica Safari e riapri l'icona.
+## Installazione / aggiornamento su GitHub Pages
+1. Apri il repository `babiicornel/-SUPER-QUIZ`.
+2. Sostituisci i file nella cartella principale del repository con gli 8 file di questo archivio: `index.html`, `style.css`, `app.js`, `manifest.webmanifest`, `sw.js`, `icon-192.png`, `icon-512.png`, `README.md`.
+3. Esegui il commit sulla branch `main` e attendi la pubblicazione di GitHub Pages.
+4. Su iPhone/iPad apri il sito con Safari e ricaricalo con connessione Internet. Chiudi e riapri la PWA installata se mostra ancora la versione precedente.
 
-## Dati e privacy
-I nomi, i punteggi, le statistiche e i premi sono salvati localmente nel browser/dispositivo tramite localStorage. Non vengono sincronizzati automaticamente tra iPhone e iPad. La classifica è quindi locale al singolo dispositivo. Per una classifica condivisa tra più dispositivi/utenti occorre aggiungere un backend e regole di protezione dei dati, soprattutto perché il gioco è rivolto a minori.
+URL invariato: https://babiicornel.github.io/-SUPER-QUIZ/
 
-## Limiti noti della build 2.0
-La modalità sfida è locale e a turni sullo stesso dispositivo, non multiplayer online. Le modalità facile/standard/sfida modificano durata e punteggio, mentre il livello didattico è associato alla classe selezionata; non è ancora un sistema adattivo. Prima di un uso didattico ufficiale, rivedere i contenuti con un insegnante.
+## Dati e sincronizzazione
+Punteggi, statistiche, nome e premi restano memorizzati localmente nel browser/dispositivo. Non vengono sincronizzati tra iPhone e iPad. La sincronizzazione online non è attiva in questa versione: richiede un backend, autenticazione e regole di protezione adeguate, soprattutto perché il gioco è rivolto a minori.
 
-
-## Aggiornamento audio
-La versione audio aggiunge effetti sintetizzati tramite Web Audio API, senza file audio esterni:
-- selezione classe/materia e pulsanti;
-- avvio partita e cambio turno;
-- risposta corretta e risposta errata;
-- passaggio alla domanda successiva;
-- conclusione, vittoria e conquista medaglie.
-Il controllo 🔊/🔇 disattiva o riattiva gli effetti. Su iPhone/iPad l'audio viene avviato in seguito a un'interazione dell'utente, come richiesto da Safari.
-
-
-## Correzione jingle di apertura
-Su iOS/iPadOS Safari non consente di riprodurre audio automaticamente al caricamento della pagina. Il jingle iniziale viene quindi avviato al primo tocco/tasto dell'utente, dopo lo sblocco dell'AudioContext. La cache offline è stata aggiornata a `super-quiz-v4-opening`.
-
-
-## Miglioramento audio e spiegazioni didattiche
-- Effetti sonori più ricchi, con armoniche sovrapposte e inviluppi più morbidi: selezione, risposta corretta/errata, avanzamento, vittoria, medaglia e cambio turno.
-- Per ogni risposta errata, la schermata mostra la soluzione, la spiegazione associata alla domanda, un consiglio di studio specifico per materia e un suggerimento pratico per ragionare la prossima volta.
-- Per le risposte corrette viene mantenuta una conferma con spiegazione breve.
-- Cache offline aggiornata a `super-quiz-v5-audio-explanations`.
+## Limiti
+La sfida a due giocatori è a turni sullo stesso dispositivo, non online. I livelli facile/standard/sfida regolano durata e punteggio, non un algoritmo adattivo. I contenuti sono materiale didattico di esercitazione e andrebbero revisionati da un insegnante prima di un uso scolastico ufficiale.

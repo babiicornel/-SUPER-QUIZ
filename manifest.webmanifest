@@ -1,12 +1,12 @@
 {
-  "name": "SUPER QUIZ 2.0",
+  "name": "SUPER QUIZ 3.0",
   "short_name": "SUPER QUIZ",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f4f2ff",
   "theme_color": "#6757df",
-  "description": "Quiz educativo per la scuola primaria, dalla prima alla quinta.",
+  "description": "Quiz educativo per la scuola primaria con cinque materie, cinque classi e percorsi tematici.",
   "icons": [
     {
       "src": "icon-192.png",

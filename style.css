@@ -24,3 +24,5 @@ main{flex:1;padding:6px 0 20px}footer{text-align:center;padding:14px;color:var(-
 .explain p{margin:5px 0 12px;font-weight:650;line-height:1.45}
 .explain strong{display:block;margin-top:8px;color:var(--primary);font-size:13px}
 .feedback{line-height:1.45}
+
+.worldrow{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}.worldrow:last-child{border-bottom:0}.worldicon{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:25px;flex-shrink:0}.worldinfo{flex:1;min-width:0}.worldinfo b{display:block;font-size:14px}.worldinfo small{display:block;color:var(--muted);font-size:10px;font-weight:800;margin:3px 0 6px}.worldbar{height:6px;border-radius:10px;background:var(--line);overflow:hidden}.worldbar span{display:block;height:100%;background:linear-gradient(90deg,#6757df,#24b5b4)}.worldgo{padding:9px 11px;border-radius:11px;background:var(--primary);color:white;font-size:10px;font-weight:1000}
